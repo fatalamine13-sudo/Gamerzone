@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GamerZone | Accueil - Vidéos & Jeux en ligne</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- BARRE DE NAVIGATION -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">GAMER<span>ZONE</span></a>
+    <input type="checkbox" id="burger-toggle" class="burger-checkbox">
+    <label for="burger-toggle" class="burger-button">
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+    </label>
+    <ul class="nav-menu">
+      <li><a href="index.html" class="active">Accueil</a></li>
+      <li><a href="videos.html">Vidéos</a></li>
+      <li><a href="jeux.html">Mini-Jeux</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- BANNER PUB -->
+  <div class="pub-banner">▼ ESPACE PUBLICITAIRE ADSENSE (728x90) ▼</div>
+
+  <!-- SECTION HERO -->
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Vos Vidéos de Gameplay en Full HD</h1>
+      <p>Regardez les meilleures astuces et jouez directement depuis votre navigateur.</p>
+      <a href="#nouveautes" class="btn">Découvrir les nouveautés</a>
+    </div>
+  </header>
+
+  <!-- CONTENU PRINCIPAL -->
+  <main class="container" id="nouveautes">
+    <h2 class="page-title">À la une aujourd'hui</h2>
+    
+    <div class="grid">
+      <!-- Carte 1 (Lien vers la page de lecture vidéo) -->
+      <a href="watch.html" class="card">
+        <div class="card-thumb" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://picsum.photos/400/250?random=1')">▶</div>
+        <div class="card-body">
+          <h3>Secret de FC 26 : Comment marquer à coup sûr</h3>
+          <p>Tutoriel vidéo complet pour maîtriser les tirs enroulés et humilier vos adversaires en ligne.</p>
+        </div>
+      </a>
+
+      <!-- Carte 2 (Lien vers la page de jeu) -->
+      <a href="watch.html" class="card">
+        <div class="card-thumb" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://picsum.photos/400/250?random=2')">🕹️</div>
+        <div class="card-body">
+          <h3>Jouer à Retro Car Racing</h3>
+          <p>Prenez le volant dans ce mini-jeu de course rétro ultra rapide. Pas de téléchargement requis.</p>
+        </div>
+      </a>
+    </div>
+  </main>
+
+  <footer>&copy; 2026 GamerZone - Développé en HTML/CSS pur.</footer>
+</body>
+</html>
