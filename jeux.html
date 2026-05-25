@@ -3,38 +3,162 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GamerZone | Mini-Jeux Gratuits en Ligne</title>
+  <title>GamerZone - Mini-Jeux Gratuits</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Styles spécifiques au jeu pour éviter de casser le reste */
+    .game-container {
+      background: #1a1a24;
+      border: 2px solid #ff007f;
+      border-radius: 12px;
+      padding: 30px 20px;
+      text-align: center;
+      max-width: 400px;
+      margin: 30px auto;
+      box-shadow: 0 0 20px rgba(255, 0, 127, 0.2);
+    }
+    .click-btn {
+      width: 130px;
+      height: 130px;
+      background: radial-gradient(circle, #ff007f, #7928ca);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 50px;
+      cursor: pointer;
+      margin: 20px 0;
+      box-shadow: 0 0 25px rgba(255, 0, 127, 0.6);
+      transition: transform 0.1s ease;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .click-btn:active {
+      transform: scale(0.9);
+      box-shadow: 0 0 15px rgba(255, 0, 127, 0.9);
+    }
+    .score-display {
+      font-size: 24px;
+      font-weight: bold;
+      color: #00f0ff;
+      text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+      margin-bottom: 10px;
+    }
+    .shop-btn {
+      background: #00f0ff;
+      color: #0f0c1b;
+      border: none;
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 15px;
+      width: 100%;
+    }
+    .shop-btn:disabled {
+      background: #444;
+      color: #888;
+      cursor: not-allowed;
+    }
+  </style>
 </head>
 <body>
 
-  <nav class="navbar">
-    <a href="index.html" class="logo">GAMER<span>ZONE</span></a>
-    <input type="checkbox" id="burger-toggle" class="burger-checkbox">
-    <label for="burger-toggle" class="burger-button">
-      <span class="burger-line"></span>
-      <span class="burger-line"></span>
-      <span class="burger-line"></span>
-    </label>
-    <ul class="nav-menu">
-      <li><a href="index.html">Accueil</a></li>
-      <li><a href="videos.html">Vidéos</a></li>
-      <li><a href="jeux.html" class="active">Mini-Jeux</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
+  <!-- Menu de navigation -->
+  <header>
+    <div class="logo">Gamer<span>Zone</span></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="videos.html">Vidéos</a></li>
+        <li><a href="jeux.html" class="active">Jeux</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <div class="pub-banner">▼ ESPACE PUBLICITAIRE ADSENSE ▼</div>
-
+  <!-- Contenu Principal -->
   <main class="container">
-    <h2 class="page-title">Espace Arcade : Jouez en Ligne</h2>
-    
-    <div class="grid">
-      <!-- Jeu 1 -->
-      <a href="watch.html" class="card">
-        <div class="card-thumb" style="background-image: url('https://picsum.photos/400/250?random=5')">🕹️</div>
-        <div class="card-body">
-          <h3>Super Space Invaders</h3>
+    <section class="hero">
+      <h1>🎮 Mini-Jeux Android Libres</h1>
+      <p>Pas besoin de téléchargement, joue directement depuis ton navigateur !</p>
+    </section>
+
+    <!-- ZONE PUBLICITÉ BANNIÈRE -->
+    <div class="ads-banner">
+      <p style="color: #666; font-size: 12px; margin-bottom: 5px;">PUBLICITÉ ADSENSE</p>
+      <div style="background: #222; height: 90px; border: 1px dashed #444; display: flex; align-items: center; justify-content: center; color: #555;">
+        Espace Pub disponible (728x90)
+      </div>
+    </div>
+
+    <!-- LE JEU CLICKER -->
+    <div class="game-container">
+      <h2>🪙 Gamer Coin Clicker</h2>
+      <p style="color: #bbb; font-size: 14px;">Clique sur la pièce pour générer des pièces virtuelles !</p>
+      
+      <button class="click-btn" id="clickerBtn">🎮</button>
+      
+      <div class="score-display">Coins : <span id="score">0</span></div>
+      <div style="color: #aaa; font-size: 14px;" id="ppsDisplay">+0 pièce / sec</div>
+
+      <!-- Amélioration (Boutique) -->
+      <button class="shop-btn" id="upgradeBtn" disabled>Acheter Auto-Clicker (Coût: 15 Coins)</button>
+    </div>
+
+  </main>
+
+  <!-- CODE SCRIPT (Le moteur du jeu en JavaScript) -->
+  <script>
+    let score = 0;
+    let autoClickers = 0;
+    let upgradeCost = 15;
+
+    const scoreDisplay = document.getElementById('score');
+    const clickerBtn = document.getElementById('clickerBtn');
+    const upgradeBtn = document.getElementById('upgradeBtn');
+    const ppsDisplay = document.getElementById('ppsDisplay');
+
+    // Action quand on clique sur le bouton central
+    clickerBtn.addEventListener('click', () => {
+      score++;
+      updateDisplay();
+    });
+
+    // Action quand on achète l'amélioration
+    upgradeBtn.addEventListener('click', () => {
+      if (score >= upgradeCost) {
+        score -= upgradeCost;
+        autoClickers++;
+        upgradeCost = Math.round(upgradeCost * 1.5); // Augmente le prix du prochain
+        updateDisplay();
+      }
+    });
+
+    // Mise à jour de l'affichage sur l'écran
+    function updateDisplay() {
+      scoreDisplay.textContent = score;
+      upgradeBtn.textContent = `Acheter Auto-Clicker (Coût: ${upgradeCost} Coins)`;
+      ppsDisplay.textContent = `+${autoClickers} pièce / sec`;
+      
+      // Active ou désactive le bouton de la boutique selon l'argent disponible
+      if (score >= upgradeCost) {
+        upgradeBtn.disabled = false;
+      } else {
+        upgradeBtn.disabled = true;
+      }
+    }
+
+    // Boucle automatique qui fait travailler l'auto-clicker chaque seconde
+    setInterval(() => {
+      if (autoClickers > 0) {
+        score += autoClickers;
+        updateDisplay();
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>          <h3>Super Space Invaders</h3>
           <p>Défendez la terre contre les vagues d'extraterrestres dans ce classique indémodable.</p>
         </div>
       </a>
